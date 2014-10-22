@@ -15,11 +15,11 @@ if (isset($_POST['register']) === true) {
         if (doesUsernameExist($_POST['username']) === true) {
             $error[] = 'The username \'' . $_POST['username'] . '\' is already taken.';
         } if (strlen($_POST['username']) < 3 || strlen($_POST['username']) > 30) {
-            $error[] = 'This username is to long or to short it must be between 3 and 30.';
+            $error[] = 'This username is too long or too short; it must be between 3 and 30 characters long.';
         } if (strlen($_POST['password']) < 6 || strlen($_POST['password']) > 40) {
-            $error[] = 'This password is to long or to short it must be between 5 and 40.';
+            $error[] = 'This password is too long or too short; it must be between 5 and 40 characters long.';
         } if ($_POST['password'] !== $_POST['re_password']) {
-            $error[] = 'The filled in passwords doesn\'t match.';
+            $error[] = 'The filled in passwords don\'t match.';
         }
     }
     
@@ -35,10 +35,10 @@ if (isset($_POST['register']) === true) {
     } else {
         if (register_user($register_data) === true) {
             register_user($register_data);
-            echo 'Registerd succesfull!';
+            echo 'Registration successful!';
             exit();
         } else {
-            echo 'There did go something wrong with the registration, we are working on it!';
+            echo 'Something went wrong with the registration. Please click here to submit a bug report!';
         }
     }
 }
