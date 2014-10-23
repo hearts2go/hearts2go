@@ -1,5 +1,5 @@
 <?php
-$pageName = 'register';
+$helpChapter = 'login';
 include_once "_inc/header.php";
 
 if (isset($_POST['register']) === true) {
@@ -44,19 +44,19 @@ if (isset($_POST['register']) === true) {
 }
 ?>
 <form action="" method="post">
-    <label>Username*<br>
+    <label>Username *<br>
         <input type="text" name="username" placeholder="Username">
     </label>
     <br>
-    <label>Password*<br>
+    <label>Password *<br>
         <input type="password" name="password" placeholder="Password">
     </label>
     <br>
-    <label>Repeat Password*<br>
+    <label>Repeat Password *<br>
         <input type="password" name="re_password" placeholder="Repeat Password">
     </label>
     <br><br>
-    <label>Screen Name*<br>
+    <label>Screen Name *<br>
         <input type="text" name="screenname" placeholder="Screen Name">
     </label>
     <br>
@@ -68,6 +68,8 @@ if (isset($_POST['register']) === true) {
         <input type="submit" name="register" value="Register">
     </label>
 </form>
+
+<p>Fields marked with an asterisk (*) are required.</p>
 <?php
 include_once "_inc/footer.php";
 ?>

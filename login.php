@@ -1,10 +1,6 @@
-<style src="css/forms.css" rel="stylesheet" type="text/css"></style>
-
 <?php
-$pageName = 'register';
+$helpChapter = 'login';
 include_once "_inc/header.php";
-?>
-<?php
 
 // Als er op de login knop is gedrukt
 
@@ -13,6 +9,8 @@ if (isset($_POST['action'])) {
 		if ($_POST['username'] != '' && $_POST['password'] != '') {
 			$hashedPass = md5($_POST['password']);
 			$userData = mysqli_query($con, "SELECT password, screen_name FROM users WHERE username = '".$_POST['username']."'");
+
+			// Bestaat de gebruiker?
 			if (mysqli_num_rows($userData) > 0) {
 				$user = array();
 				foreach($userData as $data) {
@@ -20,22 +18,31 @@ if (isset($_POST['action'])) {
 					$user['password'] = $data['password'];
 				}
 
-				if ($user['password'] != $hashedPass) {																	?>
+				// Klopt het wachtwoord?
+				if ($user['password'] == $hashedPass) {
+					$_SESSION['user'] = $user;																			?>
 					<script>
-					$(document).ready(function(){
-						$('#errorfield').text("Incorrect password.");
-					});
+						$(document).ready(function(){
+							$('#msgfield').css("background-color", "#888800");
+							$('#msgfield').html("Welcome back, <?=$user['screenname']?>.");
+							$('#msgfield').fadeIn('slow');
+						})
 					</script>																							<?php
 				}
-				else {
-					$_SESSION['user'] = $user;																			?>
-					<p>Welcome, <?=$user['screenname']?></p>															<?php
+				else {																									?>
+					<script>
+						$(document).ready(function(){
+							$('#msgfield').text("Incorrect password.");
+							$('#msgfield').fadeIn('slow');
+						});
+					</script>																							<?php
 				}
 			}
 			else {																										?>
 				<script>
 				$(document).ready(function(){
-					$('#errorfield').text('User not found. Please check your username or go back to register.');
+					$('#msgfield').html('User not found. Would you like to <a href="register.php">register</a>?');
+					$('#msgfield').fadeIn('slow');
 				});
 				</script>																								<?php
 			}
@@ -43,7 +50,8 @@ if (isset($_POST['action'])) {
 		else {																											?>
 			<script>
 				$(document).ready(function(){
-					$('#errorfield').text("Please enter both a username and a password.");
+					$('#msgfield').text("Please enter both a username and a password.");
+					$('#msgfield').fadeIn('slow');
 				});
 			</script>																									<?php
 		}
@@ -71,4 +79,4 @@ if (isset($_POST['action'])) {
     </ul>
 </form>
 
-<p id="errorfield"></p>
+<p id="msgfield"></p>

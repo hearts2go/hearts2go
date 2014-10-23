@@ -1,5 +1,5 @@
 <?php
-$pageName = 'home';
+$helpChapter = 'home';
 include_once "_inc/header.php";
 ?>
 
