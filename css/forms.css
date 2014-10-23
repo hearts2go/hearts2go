@@ -6,3 +6,9 @@
     border: 1px solid black;
     text-align: center;
 }
+
+.charbutton {
+    padding: 20px;
+    background-color: aliceblue;
+    color: black;
+}
