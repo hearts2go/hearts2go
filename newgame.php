@@ -6,48 +6,101 @@ $gameNr = str_pad(rand(1, 99999999), 8, "0", STR_PAD_LEFT);																?>
 
 <p>Game Number <?=$gameNr?></p>
 
-<div>How many people will be playing?</div>
-<div style="margin:30px">
-	<span class="charButton">3</span>
-	<span class="charButton">4</span>
-	<span class="charButton">5</span>
-	<span class="charButton">6</span>
+<p><b>Which gametype would you like to play?</b></p>
+<form action="ingame.php?gameid=<?=$gameNr?>" method="post">
+	<div style="margin:30px;">
+		<span class="charButton gamepicker" id="gameArg">Argentinan</span>
+		<span class="charButton gamepicker" id="gameBla">Black Lady</span>
+		<span class="charButton gamepicker" id="gameDut">Dutch</span>
+		<span class="charButton gamepicker" id="gameNAm">North American</span>
+	</div>
+
+	<p><b>Rules:</b></p>
+	<p id="rules">Please select a game from the list above.</p>
+
+	<p><b>Players:</b></p>
+	<table id="playerslist">
+		<tr>
+			<th>Screenname</th>
+			<th>Username</th>
+			<th>Password</th>
+			<th></th>
+		</tr>
+	</table>
+	<input type="submit" name="playerlist" value="Next">
+</form>
+<div style="margin:30px;">
+	<span class="charButton" id="addPlayer">Add another player</span>
 </div>
-<div></div>
-<div>Which gametype would you like to play?</div>
-<!--
-TODO: Gametypes opzoeken.
--->
+
 <script>
 	$(document).ready(function(){
-		var amountOfPlayers = 4;
 
-		$(".charButton").click(function(){
-			amountOfPlayers = $(this).text();
-			$(".introducePlayer").remove();
-			for (var playernr = amountOfPlayers; playernr >= 1; playernr--) {
-				$("#playerListTitle").after("<tr class='introducePlayer'>" +
-				"							<td>Player "+ playernr +"</td>" +
-				"							<td><input type='text' name='username'></td>" +
-				"							<td><input type='text' name='screenname'><td>" +
-				"						</tr>");
-			}
+		// Speler toevoegen
+		$("#addPlayer").click(function(){
+			$("#playerslist").append("<tr>" +
+									"	<td>_screenname_</td>" +
+									"	<td>_username_</td>" +
+									"	<td>_password_</td>" +
+									"	<td class='removebutton'>remove</td>" +
+									"</tr>");
+		});
+
+		// Speler verwijderen
+		$("#playerslist").on("click", "tr .removebutton", function(){
+			$(this).parent().remove();
+		})
+
+		// keuzefunctionaliteit
+		$(".gamepicker").click(function(){
+			$(".gamepicker").removeClass("charbuttonOn");
+			$(".gamepicker").addClass("charbutton");
+			$(this).removeClass("charbutton");
+			$(this).addClass("charbuttonOn");
+		})
+
+		// Laat de juiste regels zien voor elk spel type
+		$("#gameArg").click(function(){
+			$("#rules").html("<ul>" +
+							"	<li>Recommended players: 4-5</li>" +
+							"	<li>Played with a full pack</li>" +
+							"	<li>&spades;Q - 13 points</li>" +
+							"	<li>J - 5 points</li>" +
+							"	<li>&hearts; - 1 point</li>" +
+							"</ul>")
+		})
+
+		$("#gameBla").click(function(){
+			$("#rules").html("<ul>" +
+							"	<li>Recommended players: 6-10</li>" +
+							"	<li>Played with two full packs</li>" +
+							"	<li>&spades;Q - 50 points</li>" +
+							"	<li>&spades;A - 40 points</li>" +
+							"	<li>&hearts;A, &hearts;K, &hearts;Q, &hearts;J - 10 points</li>" +
+							"	<li>&hearts;2 to &hearts;10 - face value</li>" +
+							"</ul>")
+		})
+
+		$("#gameDut").click(function(){
+			$("#rules").html("<ul>" +
+							"	<li>Recommended players: 3-4 players</li>" +
+							"	<li>Played with a piquet pack</li>" +
+							"	<li>&spades;Q - 5 points</li>" +
+							"	<li>&clubs;J - 2 points</li>" +
+							"	<li>&hearts; - 1 point</li>" +
+							"</ul>")
+		})
+
+		$("#gameNAm").click(function(){
+			$("#rules").html("<ul>" +
+							"	<li>Recommended players: 4-5 players</li>" +
+							"	<li>Played with a full pack</li>" +
+							"	<li>&spades;Q - 13 points</li>" +
+							"	<li>&hearts; - 1 point</li>" +
+							"</ul>")
 		})
 	})
 </script>
-
-<form action="ingame.php?gameid=<?=$gameNr?>" method="post">
-	<table>
-		<tr id="playerListTitle">
-			<th></th>
-			<th>Username</th>
-			<th>Screenname</th>
-		</tr>
-	</table>
-	<input type="submit" name="playerlist" value="Confirm">
-</form>
-
-
 
 
 <?php include_once "_inc/footer.php"; ?>
