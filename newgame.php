@@ -19,15 +19,8 @@ $gameNr = str_pad(rand(1, 99999999), 8, "0", STR_PAD_LEFT);																?>
 	<p id="rules">Please select a game from the list above.</p>
 
 	<p><b>Players:</b></p>
-	<table id="playerslist">
-		<tr>
-			<th>Screenname</th>
-			<th>Username</th>
-			<th>Password</th>
-			<th></th>
-		</tr>
-	</table>
-	<input type="submit" name="playerlist" value="Next">
+	<div id="playerslist"></div>
+	<button class="nextButton" type="submit" name="playerlist">Next</button>
 </form>
 <div style="margin:30px;">
 	<span class="charButton" id="addPlayer">Add another player</span>
@@ -38,17 +31,27 @@ $gameNr = str_pad(rand(1, 99999999), 8, "0", STR_PAD_LEFT);																?>
 
 		// Speler toevoegen
 		$("#addPlayer").click(function(){
-			$("#playerslist").append("<tr>" +
-									"	<td>_screenname_</td>" +
-									"	<td>_username_</td>" +
-									"	<td>_password_</td>" +
-									"	<td class='removebutton'>remove</td>" +
-									"</tr>");
+			$("#playerslist").append("<table style='padding-top:60px;'>" +
+									"<tr>" +
+									"	<td>Screenname:</td>" +
+									"	<td><input class='formtext' type='text'></input></td>" +
+									"</tr>" +
+									"<tr>" +
+									"	<td>Username:</td>" +
+									"	<td><input class='formtext' type='text'></input></td>" +
+									"</tr>" +
+									"	<td>Password:</td>" +
+									"	<td><input class='formtext' type='text'></input></td>" +
+									"</tr>" +
+									"<tr>" +
+									"	<td></td><td class='removebutton charbutton'>Remove</td>" +
+									"</tr>" +
+									"</table>");
 		});
 
 		// Speler verwijderen
 		$("#playerslist").on("click", "tr .removebutton", function(){
-			$(this).parent().remove();
+			$(this).parent().parent().remove();
 		})
 
 		// keuzefunctionaliteit
@@ -62,7 +65,7 @@ $gameNr = str_pad(rand(1, 99999999), 8, "0", STR_PAD_LEFT);																?>
 		// Laat de juiste regels zien voor elk spel type
 		$("#gameArg").click(function(){
 			$("#rules").html("<ul>" +
-							"	<li>Recommended players: 4-5</li>" +
+							"	<li>Recommended players: 4-5 players</li>" +
 							"	<li>Played with a full pack</li>" +
 							"	<li>&spades;Q - 13 points</li>" +
 							"	<li>J - 5 points</li>" +
@@ -72,7 +75,7 @@ $gameNr = str_pad(rand(1, 99999999), 8, "0", STR_PAD_LEFT);																?>
 
 		$("#gameBla").click(function(){
 			$("#rules").html("<ul>" +
-							"	<li>Recommended players: 6-10</li>" +
+							"	<li>Recommended players: 6-10 players</li>" +
 							"	<li>Played with two full packs</li>" +
 							"	<li>&spades;Q - 50 points</li>" +
 							"	<li>&spades;A - 40 points</li>" +

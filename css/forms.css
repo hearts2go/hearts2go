@@ -11,10 +11,26 @@
     padding: 20px;
     background-color: aliceblue;
     color: black;
+    border: none;
+    text-align: center;
 }
 
 .charbuttonOn {
     padding: 20px;
     background-color: cadetblue;
     color: black;
+}
+
+.nextButton {
+    float: left;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 20px;
+    background-color: aliceblue;
+    border: none;
+}
+
+.formtext {
+    font-size: 150%;
 }
