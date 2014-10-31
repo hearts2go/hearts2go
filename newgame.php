@@ -63,7 +63,7 @@ $gameNr = str_pad(rand(1, 99999999), 8, "0", STR_PAD_LEFT);																?>
 
 		// Speler verwijderen
 		$("#playerslist").on("click", "tr .removebutton", function(){
-			$(this).parent().parent().remove();
+			$(this).parent().parent().parent().remove();
 		})
 
 		// keuzefunctionaliteit
