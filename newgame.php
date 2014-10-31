@@ -23,7 +23,7 @@ $gameNr = str_pad(rand(1, 99999999), 8, "0", STR_PAD_LEFT);																?>
 	<button class="nextButton" type="submit" name="playerlist">Next</button>
 </form>
 <div style="margin:30px;">
-	<span class="charButton" id="addPlayer">Add another player</span>
+	<span class="charButton" id="addPlayer">Add an anonymous player</span> <span class="charButton" id="addRegPlayer">Add an registered player</span>
 </div>
 
 <script>
@@ -31,17 +31,29 @@ $gameNr = str_pad(rand(1, 99999999), 8, "0", STR_PAD_LEFT);																?>
 
 		// Speler toevoegen
 		$("#addPlayer").click(function(){
-			$("#playerslist").append("<table style='padding-top:60px;'>" +
+			$("#playerslist").append("<table class='singlePlayer' style='padding-bottom:30px;'>" +
 									"<tr>" +
 									"	<td>Screenname:</td>" +
-									"	<td><input class='formtext' type='text'></input></td>" +
+									"	<td><input class='formtext screennameField' type='text'></input></td>" +
+									"</tr>" +
+									"<tr>" +
+									"	<td></td><td class='removebutton charbutton'>Remove</td>" +
+									"</tr>" +
+									"</table>");
+		});
+
+		$("#addRegPlayer").click(function(){
+			$("#playerslist").append("<table class='singlePlayer' style='padding-bottom:30px;'>" +
+									"<tr>" +
+									"	<td>Screenname:</td>" +
+									"	<td><input class='formtext screennameField' type='text'></input></td>" +
 									"</tr>" +
 									"<tr>" +
 									"	<td>Username:</td>" +
-									"	<td><input class='formtext' type='text'></input></td>" +
+									"	<td><input class='formtext usernameField' type='text'></input></td>" +
 									"</tr>" +
 									"	<td>Password:</td>" +
-									"	<td><input class='formtext' type='text'></input></td>" +
+									"	<td><input class='formtext passwordField' type='text'></input></td>" +
 									"</tr>" +
 									"<tr>" +
 									"	<td></td><td class='removebutton charbutton'>Remove</td>" +
