@@ -20,11 +20,13 @@ $gameNr = str_pad(rand(1, 99999999), 8, "0", STR_PAD_LEFT);																?>
 
 	<p><b>Players:</b></p>
 	<div id="playerslist"></div>
-	<button class="nextButton" type="submit" name="playerlist">Next</button>
-</form>
+
 <div style="margin:30px;">
-	<span class="charButton" id="addPlayer">Add an anonymous player</span> <span class="charButton" id="addRegPlayer">Add an registered player</span>
+	<span class="charButton" id="addPlayer">Add an anonymous player</span> <span class="charButton" id="addRegPlayer">Add a registered player</span>
 </div>
+
+<button class="nextButton" type="submit">Next</button>
+</form>
 
 <script>
 	$(document).ready(function(){
@@ -34,7 +36,7 @@ $gameNr = str_pad(rand(1, 99999999), 8, "0", STR_PAD_LEFT);																?>
 			$("#playerslist").append("<table class='singlePlayer' style='padding-bottom:30px;'>" +
 									"<tr>" +
 									"	<td>Screenname:</td>" +
-									"	<td><input class='formtext screennameField' type='text'></input></td>" +
+									"	<td><input class='formtext screennameField' type='text' name='anonScreenname'></input></td>" +
 									"</tr>" +
 									"<tr>" +
 									"	<td></td><td class='removebutton charbutton'>Remove</td>" +
@@ -46,14 +48,14 @@ $gameNr = str_pad(rand(1, 99999999), 8, "0", STR_PAD_LEFT);																?>
 			$("#playerslist").append("<table class='singlePlayer' style='padding-bottom:30px;'>" +
 									"<tr>" +
 									"	<td>Screenname:</td>" +
-									"	<td><input class='formtext screennameField' type='text'></input></td>" +
+									"	<td><input class='formtext screennameField' type='text' name='screenname'></input></td>" +
 									"</tr>" +
 									"<tr>" +
 									"	<td>Username:</td>" +
-									"	<td><input class='formtext usernameField' type='text'></input></td>" +
+									"	<td><input class='formtext usernameField' type='text' name='username'></input></td>" +
 									"</tr>" +
 									"	<td>Password:</td>" +
-									"	<td><input class='formtext passwordField' type='text'></input></td>" +
+									"	<td><input class='formtext passwordField' type='text' name='pass'></input></td>" +
 									"</tr>" +
 									"<tr>" +
 									"	<td></td><td class='removebutton charbutton'>Remove</td>" +
