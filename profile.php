@@ -2,7 +2,7 @@
 include '_inc/header.php';
 
 $user_data = array();
-$username = "daan";
+$username = "mathieu";
 
 //krijg gegevens met username en zet in array
 $username = trim($username);
