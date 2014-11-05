@@ -1,13 +1,18 @@
 <?php
-function register_user($register_data) {
+function register_user($user_data, $profile_data)
+{
     global $con;
-    array_walk($register_data, 'array_sanitize');
-    $register_data['password'] = md5($register_data['password']);
-    
-    $fields = implode(', ', array_keys($register_data));
-    $data = '\'' . implode('\', \'', $register_data) . '\'';
-    
-    return mysqli_query($con, "INSERT INTO users($fields) VALUES ($data)");
+
+    $user_data['password'] = password_hash($user_data['password'], PASSWORD_BCRYPT);
+
+    $fields_user = implode(', ', array_keys($user_data));
+    $data_user = '\'' . implode('\', \'', $user_data) . '\'';
+
+    $fields_profile = implode(', ', array_keys($profile_data));
+    $data_profile = '\'' . implode('\', \'', $profile_data) . '\'';
+
+    mysqli_query($con, "INSERT INTO users($fields_user) VALUES ($data_user)");
+    mysqli_query($con, "INSERT INTO profile($fields_profile) VALUES ($data_profile)");
 }
 
 function doesUsernameExist($username) {
@@ -18,7 +23,7 @@ function doesUsernameExist($username) {
 }
 
 function error_handeling($error) {
-    return '<ul><li>' . implode('</li><li>', $error) . '</li></ul>';
+    return '<ul class="error"><li class="error">' . implode('</li><li class="error">', $error) . '</li></ul>';
 }
 
 function array_sanitize(&$item) {
