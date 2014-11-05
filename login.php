@@ -23,9 +23,6 @@ if (isset($_POST['action'])) {
 					$hash = $data['password'];
                 }
 
-				print_r($hash);
-				print_r($_POST['password']);
-
 				if (password_verify($_POST['password'], $hash)) {
 					$_SESSION['user'] = $user;																			?>
 					<script>
