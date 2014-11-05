@@ -22,7 +22,7 @@ if (isset($_POST['action'])) {
                 foreach ($userData as $data) {
                     $hash = $data['password'];
                 }
-				if ($user['password'] == $hashedPass) {
+				if (password_verify($_POST['password'], $hash)) {
 					$_SESSION['user'] = $user;																			?>
 					<script>
 						$(document).ready(function(){
