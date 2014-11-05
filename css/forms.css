@@ -11,10 +11,37 @@
     padding: 20px;
     background-color: aliceblue;
     color: black;
+    border: none;
+    text-align: center;
 }
 
 .charbuttonOn {
     padding: 20px;
     background-color: cadetblue;
     color: black;
+}
+
+.nextButton {
+    float: left;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 20px;
+    background-color: aliceblue;
+    border: none;
+}
+
+.formtext {
+    font-size: 150%;
+}
+
+#settingsPanel {
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    border: 3px solid black;
+    padding: 20px;
 }

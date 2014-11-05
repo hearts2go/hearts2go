@@ -1,8 +1,14 @@
 <div id="settingsPanel">
-<b>Endgame:</b><br>
-<input type="radio" name="playUntil" value="points" class="limitP">Limited Points</input><br>
-<input type="radio" name="playUntil" value="tricks" class="limitT">Limited Tricks</input><br>
-<input type="radio" name="playUntil" value="back" class="limitP" checked="checked">To the limit and back</input><br>
+	<b>Play until:</b><br>
+	<input type="radio" name="playUntil" value="points" class="pLimit">Point limit is reached</input><br>
+	<input type="radio" name="playUntil" value="tricks" class="tLimit">Trick limit is reached</input><br>
+	<input type="radio" name="playUntil" value="back" class="pLimit" checked="checked">Point limit and back</input><br>
 
-Limit: <input type="text" name="unselected"></input>
+	Limit: <input type="text" name="pLimit"></input>
+
+	<span class="charbutton" id="settingsExit">Apply</span>
 </div>
+
+<script>
+
+</script>

@@ -20,8 +20,12 @@ if (isset($_POST['action'])) {
 				// Klopt het wachtwoord?
                 $hash;
                 foreach ($userData as $data) {
-                    $hash = $data['password'];
+					$hash = $data['password'];
                 }
+
+				print_r($hash);
+				print_r($_POST['password']);
+
 				if (password_verify($_POST['password'], $hash)) {
 					$_SESSION['user'] = $user;																			?>
 					<script>
