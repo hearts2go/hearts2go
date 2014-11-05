@@ -2,7 +2,6 @@
 $helpChapter = 'login';
 include_once "_inc/header.php";
 
-
 if (isset($_POST['register']) === true) {
     if (empty($_POST['username']) === true) {
         $error[] = '\'Username\' is not filled in.';
@@ -23,16 +22,16 @@ if (isset($_POST['register']) === true) {
             $error[] = 'The filled in passwords don\'t match.';
         }
     }
-
-    $user_data = array(
+    
+    $register_data = array(
         'username' => $_POST['username'],
         'password' => $_POST['password'],
         'screen_name' => $_POST['screenname'],
         'email' => $_POST['email']
     );
 
-    $profile_data = array(
-        'username' => $_POST['username'],
+    $register_profile = array(
+        'username' => 0,
         'gespeeld' => 0,
         'gewonnen' => 0,
         'laatste' => 0,
@@ -41,12 +40,12 @@ if (isset($_POST['register']) === true) {
         'totaal_heen' => 0,
         'totaal_terug' => 0
     );
-
+    
     if (empty($error) === false) {
         echo error_handeling($error);
     } else {
-        if (register_user($user_data, $profile_data) === true) {
-            register_user($register_data, $profile_data);
+        if (register_user($register_data, $register_profile) === true) {
+            register_user($register_data, $register_profile);
             echo 'Registration successful!';
             exit();
         } else {
@@ -56,52 +55,32 @@ if (isset($_POST['register']) === true) {
 }
 ?>
 <form action="" method="post">
-    <table>
-        <tr>
-            <label>
-                <td>Username *</td>
-                <td><input type="text" name="username" placeholder="Username"></td>
-                <!--<td>Available</td>-->
-            </label>
-        </tr>
-        <tr>
-            <label>
-                <td>Password *</td>
-                <td><input type="password" name="password" placeholder="Password"></td>
-                <!--<td>Available</td>-->
-            </label>
-        </tr>
-        <tr>
-            <label>
-                <td>Repeat Password *</td>
-                <td><input type="password" name="re_password" placeholder="Repeat Password"></td>
-                <!--<td>Available</td>-->
-            </label>
-        </tr>
-
-        <tr>
-            <label>
-                <td>Screen Name *</td>
-                <td><input type="text" name="screenname" placeholder="Screen Name"></td>
-                <!--<td>Available</td>-->
-            </label>
-        </tr>
-        <tr>
-            <label>
-                <td>E-Mail</td>
-                <td><input type="email" name="email" placeholder="E-Mail"></td>
-                <!--<td>Available</td>-->
-            </label>
-        </tr>
-        <tr>
-            <label>
-                <td><input type="submit" name="register" value="Register"></td>
-            </label>
-        </tr>
-    </table>
+    <label>Username *<br>
+        <input type="text" name="username" placeholder="Username">
+    </label>
+    <br>
+    <label>Password *<br>
+        <input type="password" name="password" placeholder="Password">
+    </label>
+    <br>
+    <label>Repeat Password *<br>
+        <input type="password" name="re_password" placeholder="Repeat Password">
+    </label>
+    <br><br>
+    <label>Screen Name *<br>
+        <input type="text" name="screenname" placeholder="Screen Name">
+    </label>
+    <br>
+    <label>E-Mail<br>
+        <input type="email" name="email" placeholder="E-Mail">
+    </label>
+    <br><br>
+    <label>
+        <input type="submit" name="register" value="Register">
+    </label>
 </form>
 
-    <p class="required">Fields marked with an asterisk (*) are required.</p>
+<p>Fields marked with an asterisk (*) are required.</p>
 <?php
 include_once "_inc/footer.php";
 ?>

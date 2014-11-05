@@ -1,4 +1,5 @@
 <?php
+<<<<<<< Updated upstream
 include '_inc/header.php';
 
 $user_data = array();
@@ -39,3 +40,18 @@ foreach ($data as $info) {
     echo 'Begonnen met \'Hearts2Go\' te gebruiken: ' . $info['date'];
 }
 ?>
+=======
+$user_data = array();
+$username = "Mathieu";
+
+?>
+
+//Screen name
+
+//Gespeelde games
+
+//Gewonnen games
+
+//Aantal middelfingers
+
+>>>>>>> Stashed changes
