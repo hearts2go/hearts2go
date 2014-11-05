@@ -2,7 +2,6 @@
 function register_user($user_data, $profile_data)
 {
     global $con;
-
     $user_data['password'] = password_hash($user_data['password'], PASSWORD_BCRYPT);
 
     $fields_user = implode(', ', array_keys($user_data));
