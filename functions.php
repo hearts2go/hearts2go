@@ -1,6 +1,5 @@
 <?php
-function register_user($user_data, $profile_data)
-{
+function register_user($user_data, $profile_data) {
     global $con;
     $user_data['password'] = password_hash($user_data['password'], PASSWORD_BCRYPT);
 
@@ -16,7 +15,7 @@ function register_user($user_data, $profile_data)
 
 function doesUsernameExist($username) {
     global $con;
-    $username = trim(mysqli_real_escape_string($con, $username));
+    $username = mysqli_real_escape_string($con, $username);
     
     return mysqli_fetch_assoc(mysqli_query($con, "SELECT username FROM users WHERE username = '$username'")) ? true : false;
 }
