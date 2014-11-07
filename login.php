@@ -24,14 +24,16 @@ if (isset($_POST['action'])) {
                 }
 
 				if (password_verify($_POST['password'], $hash)) {
-					$_SESSION['user'] = $user;																			?>
+					$_SESSION['user'] = $user;
+                    ?>
 					<script>
 						$(document).ready(function(){
 							$('#msgfield').css("background-color", "#888800");
 							$('#msgfield').html("Welcome back, <?=$user['screenname']?>.");
 							$('#msgfield').fadeIn('slow');
-						})
-					</script>																							<?php
+						});
+                    </script>
+                    <?php
 				}
 				else {																									?>
 					<script>
