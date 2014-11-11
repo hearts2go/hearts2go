@@ -66,7 +66,7 @@ if (isset($_POST['register']) === true) {
         );
 
         $register_profile = array(
-            'username' => 0,
+            'username' => $_POST['username'],
             'gespeeld' => 0,
             'gewonnen' => 0,
             'laatste' => 0,

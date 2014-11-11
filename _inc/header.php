@@ -11,6 +11,7 @@ session_start();
 </head>
 <body>
 <a href="../help.php#<?=$helpChapter?>">Help</a>
+<a href="logout.php">Logout</a>
 <?php
 require 'config.php';
 require 'functions.php';

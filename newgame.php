@@ -1,8 +1,13 @@
 <?php
 $helpChapter = 'newgame';
 include_once "_inc/header.php";
-
-$gameNr = str_pad(rand(1, 99999999), 8, "0", STR_PAD_LEFT);																?>
+$query = mysqli_query($con, "SELECT gameId FROM games");
+$row;
+foreach ($query as $data) {
+    $row = mysqli_fetch_assoc($data['gameId']);
+}
+$gameNr = '$row';
+?>
 
 <p>Game Number <?=$gameNr?></p>
 

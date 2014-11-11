@@ -7,14 +7,15 @@ include_once "_inc/header.php";
 if (isset($_POST['action'])) {
 	if ($_POST['action'] == 'login') {
 		if ($_POST['username'] != '' && $_POST['password'] != '') {
-			$userData = mysqli_query($con, "SELECT password, screen_name FROM users WHERE username = '".$_POST['username']."'");
+			$userData = mysqli_query($con, "SELECT password, screen_name, username FROM users WHERE username = '".$_POST['username']."'");
 
 			// Bestaat de gebruiker?
 			if (mysqli_num_rows($userData) > 0) {
 				$user = array();
 				foreach($userData as $data) {
 					$user['screenname'] = $data['screen_name'];
-					$user['password'] = $data['password'];
+					$user['password']   = $data['password'];
+                    $user['username']   = $data['username'];
 				}
 
 				// Klopt het wachtwoord?

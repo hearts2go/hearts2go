@@ -1,9 +1,8 @@
 <?php
-<<<<<<< Updated upstream
 include '_inc/header.php';
 
 $user_data = array();
-$username = "mathieu";
+$username = 'mathieu';
 
 //krijg gegevens met username en zet in array
 $username = trim($username);
@@ -37,21 +36,8 @@ foreach ($data as $info) {
     echo 'Totaal aantal punten terug: ' . $info['totaal_terug'] . '<br>';
 
     //registerd date
-    echo 'Begonnen met \'Hearts2Go\' te gebruiken: ' . $info['date'];
+    echo 'Begonnen met \'Hearts2Go\' te gebruiken: ' . date("l j F Y", $info['date']) . '<br>';
+
+    echo date("l j F Y");
 }
 ?>
-=======
-$user_data = array();
-$username = "Mathieu";
-
-?>
-
-//Screen name
-
-//Gespeelde games
-
-//Gewonnen games
-
-//Aantal middelfingers
-
->>>>>>> Stashed changes
