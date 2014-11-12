@@ -36,8 +36,7 @@ foreach ($data as $info) {
     echo 'Totaal aantal punten terug: ' . $info['totaal_terug'] . '<br>';
 
     //registerd date
-    echo 'Begonnen met \'Hearts2Go\' te gebruiken: ' . date("l j F Y", $info['date']) . '<br>';
-
-    echo date("l j F Y");
+    $date = date_parse($info['date']);
+    echo 'Begonnen met \'Hearts2Go\' te gebruiken: ' . $date['day'] . ' ' . $date['day'] . ' ' . $date['month'] . ' ' . $date['year'] . '<br>';
 }
 ?>
