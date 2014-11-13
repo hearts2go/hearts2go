@@ -1,43 +1,106 @@
 <?php
 include '_inc/header.php';
+//kijkt of session is gevuld
 if (isset($_SESSION['user'])) {
     $user_data = array();
     $username = $_SESSION['user']['username'];
 
     //krijg gegevens met username en zet in array
     $username = trim($username);
-    $query = "SELECT screen_name, password, email FROM users  WHERE username = '$username'";
+    $query = "SELECT screen_name, email FROM users  WHERE username = '$username'";
 
     $data = mysqli_query($con, $query);
 
+    //zet alle data in velden
+    $email;
     foreach ($data as $info) {
+        $email = $info['email'];
         ?>
         <form action="" method="post">
             <ul>
                 <li>
                     <label>ScreenName<br>
-                        <input type="text" name="screen_name" value="<?= $info['screen_name'] ?>">
+                        <input type="text" name="screen_name" value="<?php echo $info['screen_name'] ?>">
                     </label>
                 </li>
                 <li>
                     <label>Email<br>
-                        <input type="email" name="email" value="<?= $info['email'] ?>">
+                        <input type="email" name="email" value="<?php echo $info['email'] ?>">
                     </label>
                 </li>
                 <li>
                     <a href="changePassword.php">Change Password!</a>
                 </li>
                 <li>
-                    <input type="submit" name="action" value="save">
+                    <input type="submit" name="save" value="Save">
                 </li>
             </ul>
         </form>
-<?php
+        <!-- error veld -->
+        <p id="msgfield"></p>
+    <?php
+    }
+
+    if (isset($_POST['save'])) {
+        //kijkt of velden zijn ingevuld
+        if (empty($_POST['screen_name']) || empty($_POST['email'])) {
+            ?>
+            <script>
+                $(document).ready(function () {
+                    $('#msgfield').text("Fill in all fields.");
+                    $('#msgfield').fadeIn('slow');
+                });
+            </script>
+        <?php
+        } else {
+            //kijkt of data te kort of te lang is.
+            if (strlen($_POST['screen_name']) < 1 || strlen($_POST['screen_name']) > 30) {
+                ?>
+                <script>
+                    $(document).ready(function () {
+                        $('#msgfield').text("Screen name must have 1 character and can be 30 character long.");
+                        $('#msgfield').fadeIn('slow');
+                    });
+                </script>
+            <?php
+            } else {
+                //checkt of email al bestaat
+                if (doesEmailExist($_POST['email']) && $_POST['email'] != $email) {
+                    ?>
+                    <script>
+                        $(document).ready(function () {
+                            $('#msgfield').text("Email is already in use.");
+                            $('#msgfield').fadeIn('slow');
+                        });
+                    </script>
+                <?php
+                } else {
+                    //zet gegevens in array
+                    $data = array(
+                        'screen_name' => $_POST['screen_name'],
+                        'email' => $_POST['email'],
+                        'username' => $username
+                    );
+                    updateUser($data);
+                    ?>
+                    <script>
+                        $(document).ready(function(){
+                            $('#msgfield').css("background-color", "#888800");
+                            $('#msgfield').html("Settings are saved.");
+                            $('#msgfield').fadeIn('slow');
+                        });
+                    </script>
+                    <?php
+                    echo '<meta http-equiv="Refresh" content="1">';
+                }
+            }
+        }
     }
 } else {
-    if (isset($_POST['action'])) {
-        if ($_POST['action'] == 'login') {
-            if ($_POST['username'] != '' && $_POST['password'] != '') {
+    //kijkt of knop is ingedrukt
+    if (isset($_POST['login'])) {
+        if ($_POST['login'] == 'login') {
+            if (empty($_POST['username']) == false || empty($_POST['password']) == false) {
                 $userData = mysqli_query($con, "SELECT password, screen_name, username FROM users WHERE username = '".$_POST['username']."'");
 
                 // Bestaat de gebruiker?
@@ -65,7 +128,7 @@ if (isset($_SESSION['user'])) {
                                 $('#msgfield').fadeIn('slow');
                             });
                         </script>
-                        <meta http-equiv="refresh" content="2">
+                        <meta http-equiv="refresh" content="1">
                     <?php
                     }
                     else {																									?>
@@ -110,7 +173,7 @@ if (isset($_SESSION['user'])) {
                 </label>
             </li>
             <li>
-                <input type="submit" name="action" value="login">
+                <input type="submit" name="login" value="login">
             </li>
         </ul>
     </form>

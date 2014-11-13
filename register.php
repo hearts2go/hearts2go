@@ -78,6 +78,7 @@ if (isset($_POST['register']) === true) {
 
         register_user($register_data, $register_profile);
         ?>
+        <meta http-equiv="refresh" content="1 ,URL=index.php">
         <script>
             $(document).ready(function(){
                 $('#msgfield').css("background-color", "#888800");

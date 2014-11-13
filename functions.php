@@ -13,11 +13,26 @@ function register_user($user_data, $profile_data) {
     mysqli_query($con, "INSERT INTO profile($fields_profile) VALUES ($data_profile)");
 }
 
+function updateUser($data) {
+    global $con;
+    $screenName = $data['screen_name'];
+    $email = $data['email'];
+    $username = $data['username'];
+    mysqli_query($con, "UPDATE users SET screen_name = '$screenName', email = '$email' WHERE username = '$username'");
+}
+
 function doesUsernameExist($username) {
     global $con;
     $username = mysqli_real_escape_string($con, $username);
-    
+
     return mysqli_fetch_assoc(mysqli_query($con, "SELECT username FROM users WHERE username = '$username'")) ? true : false;
+}
+
+function doesEmailExist($email) {
+    global $con;
+    $username = mysqli_real_escape_string($con, $email);
+
+    return mysqli_fetch_assoc(mysqli_query($con, "SELECT email FROM users WHERE email = '$email'")) ? true : false;
 }
 
 function error_handeling($error) {

@@ -9,7 +9,7 @@ include_once "_inc/header.php";
 <a href="loadgame.php">Spel laden</a><br>
 <?php
 if ($loggedIn = true) {																									?>
-	<a href="profile.php">Profiel aanpassen</a>																			<?php
+	<a href="settings.php">Profiel aanpassen</a>																			<?php
 }
 else {																													?>
 	<a href="register.php">Registreren</a>																				<?php

@@ -36,31 +36,37 @@ if (isset($_POST['action'])) {
                     </script>
                     <?php
 				}
-				else {																									?>
+				else {
+                    ?>
 					<script>
 						$(document).ready(function(){
 							$('#msgfield').text("Incorrect password.");
 							$('#msgfield').fadeIn('slow');
 						});
-					</script>																							<?php
+					</script>
+                <?php
 				}
 			}
-			else {																										?>
+			else {
+                ?>
 				<script>
 				$(document).ready(function(){
 					$('#msgfield').html('User not found. Would you like to <a href="register.php">register</a>?');
 					$('#msgfield').fadeIn('slow');
 				});
-				</script>																								<?php
+				</script>
+            <?php
 			}
 		}
-		else {																											?>
+		else {
+            ?>
 			<script>
 				$(document).ready(function(){
 					$('#msgfield').text("Please enter both a username and a password.");
 					$('#msgfield').fadeIn('slow');
 				});
-			</script>																									<?php
+			</script>
+        <?php
 		}
 	}
 }
