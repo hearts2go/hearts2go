@@ -94,6 +94,9 @@ if (isset($_SESSION['user'])) {
             <li>
                 <input type="submit" name="changePass" value="Change">
             </li>
+            <li>
+                <a href="settings.php">Settings</a>
+            </li>
         </ul>
     </form>
 
