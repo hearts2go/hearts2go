@@ -3,11 +3,8 @@ $helpChapter = 'newgame';
 include_once "_inc/header.php";
 //krijg aantal rijen uit table.
 $query = mysqli_query($con, "SELECT gameId FROM games");
-$row;
 //gaat elke rij langs
-foreach ($query as $data) {
-    $row = $data['gameId'];
-}
+$row = mysqli_fetch_assoc($query);
 //kijkt of er rijen zijn zoja dan +1 het aantal dat er is. Anders geef game nummer 1.
 if (empty($row)) {
     $gameNr = '1';
@@ -39,9 +36,11 @@ if (empty($row)) {
 	<p><b>Players:</b></p>
 	<div id="playerslist"></div>
 
-<div style="margin:30px;">
-	<span class="charButton" id="addPlayer">Add an anonymous player</span> <span class="charButton" id="addRegPlayer">Add a registered player</span>
-</div>
+    <div style="margin:30px;">
+        <span class="charButton" id="addPlayer">Add an anonymous player</span> <span class="charButton" id="addRegPlayer">Add a registered player</span>
+    </div>
+
+    <button class="nextButton" type="submit">Next</button>
 
 </form>
 
