@@ -36,9 +36,6 @@ $gameNr = '$row';
 	<span class="charButton" id="addPlayer">Add an anonymous player</span> <span class="charButton" id="addRegPlayer">Add a registered player</span>
 </div>
 
-<button class="nextButton" type="submit">Next</button>
-
-
 </form>
 
 <script>
