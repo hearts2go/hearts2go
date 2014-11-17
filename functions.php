@@ -2,6 +2,7 @@
 function register_user($user_data, $profile_data) {
     global $con;
     $user_data['password'] = password_hash($user_data['password'], PASSWORD_BCRYPT);
+    $user_data['date'] = date('Y-m-d');
 
     $fields_user = implode(', ', array_keys($user_data));
     $data_user = '\'' . implode('\', \'', $user_data) . '\'';
@@ -48,5 +49,27 @@ function print_array($array) {
 	echo "<pre>";
 	print_r($array);
 	echo "</pre>";
+}
+
+function dateToNL($date) {
+    // Nederlandse namen van dagen en maanden, beginnend op 1 ipv 0 (is makkelijker);
+    $dagen = array(1 => "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag");
+    $maanden = array(1 => "januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december");
+
+    // Opsplitsen van de data;
+    $temp = explode("-", $date);
+
+    // Invullen variabelen;
+    // Left trimmen om de voorlopende 0 te verwijderen
+    $dag = ltrim($temp[2], "0");
+    $maand = ltrim($temp[1], "0");
+    $jaar = $temp[0];
+
+    // Dag ophalen van de datum:
+    // Waarbij N staat voor day of the week
+    $dagnr = date("N", mktime(0, 0, 0, $maand, $dag, $jaar));
+
+    // Teruggeven van de datum in het juiste formaat.
+    return $dagen[$dagnr] . " " . $dag . " " . $maanden[$maand] . " " . $jaar;
 }
 ?>
