@@ -2,11 +2,10 @@
 $helpChapter = 'newgame';
 include_once "_inc/header.php";
 //krijg aantal rijen uit table.
-
-$row = mysqli_query($con, "SELECT COUNT(gameId) AS nrGames FROM games");
+$row = mysqli_query($con, "SELECT COUNT(gameId) AS games FROM games");
 $gameNr;
 foreach($row as $data) {
-	$gameNr = $data['nrGames'];
+	$gameNr = $data['games'];
 }
 $gameNr++;
 
