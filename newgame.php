@@ -2,9 +2,9 @@
 $helpChapter = 'newgame';
 include_once "_inc/header.php";
 //krijg aantal rijen uit table.
-$query = mysqli_query($con, "SELECT gameId FROM games");
+$row = mysqli_query($con, "SELECT COUNT(gameId) FROM games");
+print_array($row);
 //gaat elke rij langs
-$row = mysqli_fetch_assoc($query);
 //kijkt of er rijen zijn zoja dan +1 het aantal dat er is. Anders geef game nummer 1.
 if (empty($row)) {
     $gameNr = '1';
