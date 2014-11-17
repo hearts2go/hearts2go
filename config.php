@@ -1,5 +1,5 @@
 <?php
-$db_error_msg = "There are some problems with connecting to the database. We are working on it.";
+$db_error_msg = "There are some problems connecting to the database. We are working on it.";
 
 $host   = 'hearts.owl-ict.nl';
 $user   = 'hearts2gosite';

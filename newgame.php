@@ -2,15 +2,14 @@
 $helpChapter = 'newgame';
 include_once "_inc/header.php";
 //krijg aantal rijen uit table.
-$row = mysqli_query($con, "SELECT COUNT(gameId) FROM games");
-print_array($row);
-//gaat elke rij langs
-//kijkt of er rijen zijn zoja dan +1 het aantal dat er is. Anders geef game nummer 1.
-if (empty($row)) {
-    $gameNr = '1';
-} else {
-    $gameNr = $row + 1;
+
+$row = mysqli_query($con, "SELECT COUNT(gameId) AS games FROM games");
+$gameNr;
+foreach($row as $data) {
+	$gameNr = $data['games'];
 }
+$gameNr++;
+
 ?>
 
 <p>Game Number <?=$gameNr?></p>
@@ -26,9 +25,22 @@ if (empty($row)) {
 		<input id="gametypeStore" type="hidden" name="gametype" value="NULL">
 	</div>
 
+	<p><b>Play until...</b></p>
+	<div style="30px">
+		<span class="charbutton modepicker" id="pLimit">Point limit is reached</span>
+		<span class="charbutton modepicker" id="tLimit">Trick limit is reached</span>
+		<span class="charbutton modepicker" id="bLimit">Point limit and back</span>
+	</div>
+
+	<p><b>When shooting the moon...</b></p>
+	<div style="30px">
+		<span class="charbutton penpicker" id="moonPen">Penalize all other players</span>
+		<span class="charbutton penpicker" id="moonRew">Reward player</span>
+	</div>
+
 	<p><b>Rules:</b></p>
 	<p id="rules">Please select a game from the list above.</p>
-
+	<p ></p>
 	<span class="charButton" id="settingsBut">Advanced</span>
 
 	<div id="settingsDiv"><?php include_once "_inc/advSettings.php"; ?></div>
@@ -98,6 +110,17 @@ if (empty($row)) {
 			$(this).addClass("charbuttonOn");
 		})
 
+		$(".modepicker") {
+			buttonPicker(".")
+		}
+
+		function buttonPicker (var group) {
+			$(group).removeClass("charbuttonOn");
+			$(group).addClass("charbutton");
+			$(this).removeClass("charbutton");
+			$(this).addClass("charbuttonOn");
+		}
+
 		// Toon/verberg geavanceerde instellingen
 
 		$("#settingsBut").click(function() {
@@ -124,7 +147,7 @@ if (empty($row)) {
 
 		$("#gameBla").click(function(){
 			$("#rules").html("<ul>" +
-							"	<li>Recommended players: 6-10 players</li>" +
+							"	<li>Recommended players: 6-8 players</li>" +
 							"	<li>Played with two full packs</li>" +
 							"	<li>&spades;Q - 50 points</li>" +
 							"	<li>&spades;A - 40 points</li>" +
