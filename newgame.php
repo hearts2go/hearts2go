@@ -27,7 +27,7 @@ $gameNr++;
 	<p><b>Play until...</b></p>
 	<div style="30px">
 		<span class="charbutton modepicker" id="pLimit">Point limit is reached</span>
-		<span class="charbutton modepicker" id="tLimit">Trick limit is reached</span>
+		<span class="charbutton modepicker" id="rLimit">Round limit is reached</span>
 		<span class="charbutton modepicker" id="bLimit">Point limit and back</span>
 	</div>
 
@@ -58,7 +58,7 @@ $gameNr++;
 <script>
 	$(document).ready(function(){
 		var currentplayer = 0;
-		$("#settingsDiv").hide()
+		$("#settingsDiv").hide();
 
 		// Speler toevoegen
 		$("#addPlayer").click(function(){
@@ -103,22 +103,11 @@ $gameNr++;
 
 		// keuzefunctionaliteit
 		$(".gamepicker").click(function(){
-			$(".gamepicker").removeClass("charbuttonOn");
-			$(".gamepicker").addClass("charbutton");
+			$('.gamepicker').removeClass("charbuttonOn");
+			$('.gamepicker').addClass("charbutton");
 			$(this).removeClass("charbutton");
 			$(this).addClass("charbuttonOn");
 		})
-
-		$(".modepicker") {
-			buttonPicker(".")
-		}
-
-		function buttonPicker (var group) {
-			$(group).removeClass("charbuttonOn");
-			$(group).addClass("charbutton");
-			$(this).removeClass("charbutton");
-			$(this).addClass("charbuttonOn");
-		}
 
 		// Toon/verberg geavanceerde instellingen
 
