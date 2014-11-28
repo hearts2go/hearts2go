@@ -1,4 +1,5 @@
 <?php
+//registreer je een nieuwe gebruiker.
 function register_user($user_data, $profile_data) {
     global $con;
     $user_data['password'] = password_hash($user_data['password'], PASSWORD_BCRYPT);
@@ -13,7 +14,7 @@ function register_user($user_data, $profile_data) {
     mysqli_query($con, "INSERT INTO users($fields_user) VALUES ($data_user)");
     mysqli_query($con, "INSERT INTO profile($fields_profile) VALUES ($data_profile)");
 }
-
+//update je de gegevens van de gebruiker!
 function updateUser($data) {
     global $con;
     $screenName = $data['screen_name'];
@@ -22,6 +23,7 @@ function updateUser($data) {
     mysqli_query($con, "UPDATE users SET screen_name = '$screenName', email = '$email' WHERE username = '$username'");
 }
 
+//check je of de username bestaat of niet.
 function doesUsernameExist($username) {
     global $con;
     $username = mysqli_real_escape_string($con, $username);
@@ -29,6 +31,7 @@ function doesUsernameExist($username) {
     return mysqli_fetch_assoc(mysqli_query($con, "SELECT username FROM users WHERE username = '$username'")) ? true : false;
 }
 
+//check je of de email bestaat of niet.
 function doesEmailExist($email) {
     global $con;
     $username = mysqli_real_escape_string($con, $email);
@@ -36,15 +39,12 @@ function doesEmailExist($email) {
     return mysqli_fetch_assoc(mysqli_query($con, "SELECT email FROM users WHERE email = '$email'")) ? true : false;
 }
 
+//print je de error(s) die in een array gezet zijn netjes uit.
 function error_handeling($error) {
     return '<ul class="error"><li class="error">' . implode('</li><li class="error">', $error) . '</li></ul>';
 }
 
-function array_sanitize(&$item) {
-    global $con;
-    $item = htmlentities(mysqli_real_escape_string($con, $item));
-}
-
+//Print array mooi uit.
 function print_array($array) {
 	echo "<pre>";
 	print_r($array);

@@ -32,7 +32,7 @@ $gameNr++;
 	</div>
 
 	<p><b>When shooting the moon...</b></p>
-	<div style="30px">
+	<div style="30px">7
 		<span class="charbutton penpicker" id="moonPen">Penalize all other players</span>
 		<span class="charbutton penpicker" id="moonRew">Reward player</span>
 	</div>

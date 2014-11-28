@@ -40,7 +40,7 @@ if (isset($_SESSION['user'])) {
         <p id="msgfield"></p>
     <?php
     }
-
+    //kijkt of knop is ingedrukt
     if (isset($_POST['save'])) {
         //kijkt of velden zijn ingevuld
         if (empty($_POST['screen_name']) || empty($_POST['email'])) {
@@ -118,7 +118,9 @@ if (isset($_SESSION['user'])) {
                         $hash = $data['password'];
                     }
 
+                    //kijkt of wachtwoord klopt
                     if (password_verify($_POST['password'], $hash)) {
+                        //zet gegevens in session
                         $_SESSION['user'] = $user;
                         ?>
                         <script>

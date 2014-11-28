@@ -15,7 +15,9 @@ if (isset($_SESSION['user'])) {
     foreach ($data as $info) {
         $hash = $info['password'];
     }
+    //als knop is ingedrukt
     if (isset($_POST['changePass'])) {
+        //kijkt of alle gegevens ingevuld zijn
         if (empty($_POST['currentPassword']) || empty($_POST['password']) || empty($_POST['rePassword'])) {
             ?>
             <script>
@@ -26,6 +28,7 @@ if (isset($_SESSION['user'])) {
             </script>
             <?php
         } else {
+            //kijkt of wachtwoord klopt
             if (password_verify($_POST['currentPassword'], $hash) == false) {
                 ?>
                 <script>
@@ -36,6 +39,7 @@ if (isset($_SESSION['user'])) {
                 </script>
                 <?php
             } else {
+                //kijkt of nieuw wachtwoord te lang of te kort is
                 if (strlen($_POST['password']) < 6 || strlen($_POST['password']) > 30) {
                     ?>
                     <script>
@@ -46,6 +50,7 @@ if (isset($_SESSION['user'])) {
                     </script>
                     <?php
                 } else {
+                    //kijkt of het nieuwe wachtwoord gelijk is aan het opnieuwe ingevoerde wachtwoord
                     if ($_POST['password'] !== $_POST['rePassword']) {
                         ?>
                         <script>
@@ -57,6 +62,7 @@ if (isset($_SESSION['user'])) {
                     <?php
                     } else {
                         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                        //update het wachtwoord.
                         mysqli_query($con, "UPDATE users SET password = '$password' WHERE username = '$username'");
                         ?>
                         <script>
@@ -106,7 +112,9 @@ if (isset($_SESSION['user'])) {
 } else {
     //kijkt of knop is ingedrukt
     if (isset($_POST['login'])) {
+        //kijkt of actie gelijk is aan login
         if ($_POST['login'] == 'login') {
+            //kijkt f gegevens ingevuld niet ingevuld zijn
             if (empty($_POST['username']) == false || empty($_POST['password']) == false) {
                 $userData = mysqli_query($con, "SELECT password, screen_name, username FROM users WHERE username = '".$_POST['username']."'");
 
@@ -125,7 +133,9 @@ if (isset($_SESSION['user'])) {
                         $hash = $data['password'];
                     }
 
+                    //kijkt of wachtwoord klopt
                     if (password_verify($_POST['password'], $hash)) {
+                        //zet gegevens in session
                         $_SESSION['user'] = $user;
                         ?>
                         <script>

@@ -1,8 +1,11 @@
 <?php
+//zet page name in variable
 $helpChapter = 'login';
 include_once "_inc/header.php";
 
+//kijkt of submit is ingedrukt
 if (isset($_POST['register']) === true) {
+    //kijkt of alles is ingevuld
     if (empty($_POST['username']) === true || empty($_POST['password']) === true || empty($_POST['re_password']) === true || empty($_POST['screenname']) === true) {
         $error[] = '';
         ?>
@@ -14,6 +17,7 @@ if (isset($_POST['register']) === true) {
         </script>
     <?php
     } else {
+        //kijkt of username in database staat zoja dan geef error
         if (doesUsernameExist($_POST['username']) === true) {
             $error[] = '';
             ?>
@@ -24,6 +28,7 @@ if (isset($_POST['register']) === true) {
                 });
             </script>
         <?php
+            //kijkt of username te lang of te kort is.
         } if (strlen($_POST['username']) < 3 || strlen($_POST['username']) > 30) {
             $error[] = '';
             ?>
@@ -34,6 +39,7 @@ if (isset($_POST['register']) === true) {
                 });
             </script>
         <?php
+            //kijkt of password te lang of te kort is.
         } if (strlen($_POST['password']) < 6 || strlen($_POST['password']) > 40) {
             $error[] = '';
             ?>
@@ -44,6 +50,7 @@ if (isset($_POST['register']) === true) {
                 });
             </script>
         <?php
+            //kijkt of beide wachtwoorden die ingevuld zijn gelijk zijn.
         } if ($_POST['password'] !== $_POST['re_password']) {
             $error[] = '';
             ?>
@@ -56,8 +63,9 @@ if (isset($_POST['register']) === true) {
             <?php
         }
     }
-
+    //kijkt of error list leeg is.
     if (empty($error)) {
+        //zet gegevens in array
         $register_data = array(
             'username' => $_POST['username'],
             'password' => $_POST['password'],
@@ -65,6 +73,7 @@ if (isset($_POST['register']) === true) {
             'email' => $_POST['email']
         );
 
+        //vult gegevens in om profile te kunnen bekijken anders is profile leeg.
         $register_profile = array(
             'username' => $_POST['username'],
             'gespeeld' => 0,
@@ -76,8 +85,10 @@ if (isset($_POST['register']) === true) {
             'totaal_terug' => 0
         );
 
+        //registreerd de user
         register_user($register_data, $register_profile);
         ?>
+        <!-- voert na het registreren door naar homepage -->
         <meta http-equiv="refresh" content="1 ,URL=index.php">
         <script>
             $(document).ready(function(){

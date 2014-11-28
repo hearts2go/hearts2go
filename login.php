@@ -3,10 +3,12 @@ $helpChapter = 'login';
 include_once "_inc/header.php";
 
 // Als er op de login knop is gedrukt
-
 if (isset($_POST['action'])) {
+    //kijkt of of actie gelijk is aan login
 	if ($_POST['action'] == 'login') {
-		if ($_POST['username'] != '' && $_POST['password'] != '') {
+        //kijkt of gegevens zijn ingevuld
+		if (empty($_POST['username']) && empty($_POST['password'])) {
+            //vraagt user gegevens op.
 			$userData = mysqli_query($con, "SELECT password, screen_name, username FROM users WHERE username = '".$_POST['username']."'");
 
 			// Bestaat de gebruiker?
@@ -18,13 +20,13 @@ if (isset($_POST['action'])) {
                     $user['username']   = $data['username'];
 				}
 
-				// Klopt het wachtwoord?
                 $hash;
                 foreach ($userData as $data) {
 					$hash = $data['password'];
                 }
-
+                //Klopt het wachtwoord?
 				if (password_verify($_POST['password'], $hash)) {
+                    //zet user gegevens in session
 					$_SESSION['user'] = $user;
                     ?>
 					<script>
@@ -70,8 +72,6 @@ if (isset($_POST['action'])) {
 		}
 	}
 }
-
-// Inlogformulier
 
 ?>
 <form action="" method="post">
